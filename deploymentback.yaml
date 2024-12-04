@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backendutn
+spec:
+  selector:
+    matchLabels:
+      app: backendutn
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: backendutn
+    spec:
+      containers:
+      - name: backendutn
+        image: pabloleogale/backendutn:latest
+        env:
+            - name: DBHOST
+              value: mysql-service
+            - name: DBPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: secrets
+                  key: DBPASSWORD 
+        ports:
+            - containerPort: 30000

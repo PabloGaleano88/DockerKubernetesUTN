@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysqlutn
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysqlutn
+  template:
+    metadata:
+      labels:
+        app: mysqlutn
+    spec:
+      containers:
+        - name: mysqlutn
+          image: pabloleogale/mysqlutn
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - name: mysql-storage
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-storage
+          persistentVolumeClaim:
+            claimName: mysql-pvc

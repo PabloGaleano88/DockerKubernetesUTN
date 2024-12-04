@@ -1,0 +1,42 @@
+# service de networking para el backend
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+spec:
+  selector:
+    app: backendutn
+  ports:
+    - protocol: TCP
+      port: 30000     # Puerto interno en el clúster
+      targetPort: 30000
+      nodePort: 30000 # Puerto en el nodo de Kubernetes
+  type: NodePort
+---
+# service de networking para el frontend
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+spec:
+  selector:
+    app: frontendutn
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 32249 
+  type: NodePort
+---
+# service de networking para mysql
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-service
+spec:
+  selector:
+    app: mysqlutn
+  ports:
+    - protocol: TCP
+      port: 3306 
+      targetPort: 3306  

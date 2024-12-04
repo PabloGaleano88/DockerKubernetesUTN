@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontendutn
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontendutn
+  template:
+    metadata:
+      labels:
+        app: frontendutn
+    spec:
+      containers:
+        - name: frontendutn
+          image: pabloleogale/frontendutn:latest
+          ports:
+            - containerPort: 80

@@ -1,0 +1,11 @@
+# persistent volumen claim para mysql, por si el pod muere no se pierda la DB
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
